@@ -24,15 +24,15 @@ class QuadTree {
       return;
     }
     if (this.isLeaf()) {
-      if (this.shapes.length >= this.config.maxLevels) {
+      if (this.shapes.length >= this.config.capacity) {
         this.split();
         const shapesNeedAdded = [...this.shapes, shape];
-        this.children.forEach(child => child.addAll(shapesNeedAdded));
-        // this.addAll(shapesNeedAdded);
+        this.addAll(shapesNeedAdded);
         this.shapes = [];
       } else {
         this.shapes.push(shape);
       }
+      return;
     }
 
     const children = this.findCollisionChildrens(shape);
