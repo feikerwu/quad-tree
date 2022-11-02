@@ -51,7 +51,6 @@ class QuadTree {
   }
 
   split() {
-    splitCalled++;
     const { x, y, width, height } = this.config.bound;
     const halfWidth = width / 2,
       halfHeight = height / 2;
