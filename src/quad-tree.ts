@@ -1,4 +1,5 @@
 import { collisionBetweenRects } from './collision';
+import { unique } from '@gtea/utils/set-op';
 
 type QuadConfig = {
   maxLevels: number;
@@ -81,16 +82,34 @@ class QuadTree {
 
   remove(shape: Shape) {}
 
-  find(bound: Bound) {}
+  find(bound: Bound) {
+    if (this.isLeaf()) {
+      return this.shapes;
+    }
 
-  clear() {}
+    let result: Bound[] = [];
+
+    const collisionChildrens = this.findCollisionChildrens(bound);
+    for (let child of collisionChildrens) {
+      result = result.concat(child.find(bound));
+    }
+
+    result = unique(result);
+
+    return result;
+  }
+
+  clear() {
+    this.traverse(node => (node.shapes = []));
+  }
+
+  traverse(cb: (tree: QuadTree) => any) {
+    cb(this);
+    this.children.forEach(child => cb(child));
+  }
 
   isLeaf() {
     return this.children.length === 0;
-  }
-
-  canAddShape() {
-    return this.shapes.length < this.config.capacity;
   }
 
   // 找到和给定图元有冲突的子树

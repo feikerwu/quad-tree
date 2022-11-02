@@ -1,0 +1,13 @@
+lockfileVersion: 5.4
+
+specifiers:
+  '@gtea/utils': ^1.0.0
+
+dependencies:
+  '@gtea/utils': 1.0.0
+
+packages:
+
+  /@gtea/utils/1.0.0:
+    resolution: {integrity: sha512-fYzgeBd6vqtAPn/Ig9r+ZX/73mhsqRxjdI6c18r3Gxxl9YFBYeRvFDjehZOiZxdOREQGIDOF7zoVkOiy/Y1b6g==}
+    dev: false
